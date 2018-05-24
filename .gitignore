@@ -9,6 +9,5 @@
 hs_err_pid*
 *.iml
 docker-helloworld/.idea
-microprofile-config.properties
 Keyvault-config-server/*
 **/.idea
