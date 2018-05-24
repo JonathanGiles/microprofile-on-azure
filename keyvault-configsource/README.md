@@ -3,6 +3,27 @@ This project demonstrates how to configure a MicroProfile application to retriev
 the MicroProfile Config APIs, to create a client-side data connection (that is, the MicroProfile application will 
 directly connect to Azure Key Vault, without any config microservice inbetween).
 
+It enables for easy dependency injection of values directly from Azure Key Vault, e.g.:
+
+```java
+@Inject
+@ConfigProperty(name = "key-name", defaultValue = "Unknown")
+String jogilesKeyValue;
+```
+
+It is also possible to access the MicroProfile config directly, to request secrets as necessary, e.g.:
+
+```java
+public class DemoClass {
+    @Inject
+    Config config;
+
+    public void method() {
+        System.out.println("Hello: " + config.getValue("key-name", String.class));
+    }        
+}
+```
+
 This sample makes use of [Payara Micro](https://www.payara.fish/payara_micro) and [MicroProfile](https://microprofile.io/) 
 to create a tiny Java war file that can be run locally on your machine. It does not 
 demonstrate how to dockerise or push the code to Azure, but you may refer to the [docker-helloworld](../docker-helloworld)
@@ -43,7 +64,8 @@ Now that we have created a service principal, we can create a resource group:
 
 ```text
 # Create a new resource group (this is optional if you already have one you want to use)
-# To get a full list of Azure locations, you can run `az account list-locations`, and select a `name` from that list.
+# To get a full list of Azure locations, you can run `az account list-locations`, 
+# and select a `name` from that list.
 # I personally chose `westus`, and used `jg-test` for the resource group name.
 az group create -l <resource_group_location> -n <resource_group_name>
 ```
