@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.jonathangiles.microprofile.config.keyvault</groupId>
+    <artifactId>keyvault-configsource</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>keyvault-configsource</name>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <payaramicro.maven.plugin.version>1.0.0</payaramicro.maven.plugin.version>
+        <output.war>keyvault-configsource</output.war>
+    </properties>
+
+    <dependencies>
+        <!-- Bring in MicroProfile Config API -->
+        <dependency>
+            <groupId>org.eclipse.microprofile.config</groupId>
+            <artifactId>microprofile-config-api</artifactId>
+            <version>1.1</version> <!-- version 1.1 available since Payara v4.1.2.174 -->
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Bring in Java EE API (Web profile) -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Azure Keyvault APIs -->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-keyvault</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.microsoft.azure/adal4j -->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>adal4j</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${output.war}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>fish.payara.maven.plugins</groupId>
+                <artifactId>payara-micro-maven-plugin</artifactId>
+                <version>${payaramicro.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <useUberJar>false</useUberJar>
+                    <daemon>false</daemon>
+                    <deployWar>true</deployWar>
+                    <payaraMicroAbsolutePath>/Users/jonathan/Tools/payara-micro-5.181.jar</payaraMicroAbsolutePath>
+                    <copySystemProperties>true</copySystemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
