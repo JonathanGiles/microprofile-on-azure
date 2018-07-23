@@ -18,15 +18,15 @@ public class ConfigDemo {
     org.eclipse.microprofile.config.Config config;
 
     @Inject
-    @ConfigProperty(name = "jogiles-key", defaultValue = "Unknown")
-    String jogilesKeyValue;
+    @ConfigProperty(name = "demo-key", defaultValue = "Unknown")
+    String demoKeyValue;
 
     @GET
     @Path("config")
     @Produces(TEXT_HTML)
     public String info() {
-        return "Welcome to the server! I know that the value for the key 'jogiles-key' is: '" + jogilesKeyValue
+        return "Welcome to the server! I know that the value for the key 'demo-key' is: '" + demoKeyValue
                 + "'<br/><br/>"
-                + "By the way, I can also look it up in a non-DI fashion: '" + config.getValue("jogiles-key", String.class) + "'";
+                + "By the way, I can also look it up in a non-DI fashion: '" + config.getValue("demo-key", String.class) + "'";
     }
 }

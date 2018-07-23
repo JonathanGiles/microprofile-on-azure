@@ -13,7 +13,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <payaramicro.maven.plugin.version>1.0.0</payaramicro.maven.plugin.version>
+        <payaramicro.maven.plugin.version>1.0.1</payaramicro.maven.plugin.version>
+        <payaramicro.version>4.1.2.181</payaramicro.version>
         <output.war>keyvault-configsource</output.war>
     </properties>
 
@@ -34,18 +35,10 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Azure Keyvault APIs -->
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-keyvault</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.microsoft.azure/adal4j -->
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>adal4j</artifactId>
-            <version>1.4.0</version>
+            <groupId>net.jonathangiles.microprofile.configsource.azure.keyvault</groupId>
+            <artifactId>key-vault-config-source</artifactId>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 
@@ -64,11 +57,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <useUberJar>false</useUberJar>
-                    <daemon>false</daemon>
+                    <payaraVersion>${payaramicro.version}</payaraVersion>
+                    <commandLineOptions>
+                        <option>
+                            <key>--deploy</key>
+                            <value>${project.build.directory}/${project.build.finalName}</value>
+                        </option>
+                    </commandLineOptions>
                     <deployWar>true</deployWar>
-                    <payaraMicroAbsolutePath>/Users/jonathan/Tools/payara-micro-5.181.jar</payaraMicroAbsolutePath>
-                    <copySystemProperties>true</copySystemProperties>
                 </configuration>
             </plugin>
         </plugins>
