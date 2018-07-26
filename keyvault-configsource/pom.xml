@@ -28,9 +28,9 @@
         </dependency>
 
         <dependency>
-            <groupId>net.jonathangiles.microprofile.configsource.azure.keyvault</groupId>
-            <artifactId>key-vault-config-source</artifactId>
-            <version>0.0.2</version>
+            <groupId>com.microsoft.sandbox.microprofile.config.keyvault</groupId>
+            <artifactId>keyvault-config-source</artifactId>
+            <version>0.0.3</version>
         </dependency>
     </dependencies>
 
